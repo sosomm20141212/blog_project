@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+            background-image: url("/image/loginback2.jpg");
+            background-size: cover;
+            font:600 16px/18px 'Open Sans',sans-serif;
+            display: flex;
+            justify-content: center;
+            }
+            .container{
+                padding-top: 100px;
+                padding-left: 160px;
+                width: 1000px;
+                height: 900px;
+            }
+            .detail{
+                width: 800px;
+                height: 700px;
+                border-radius: 0.5%;
+                background-color: rgba(162, 109, 197, 0.552);
+                color: #fff;
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .userInfo{
+                float: right;
+                margin-right: 150px;
+                font-weight: 500;
+                font-size: 17px;
+            }
+            #detail1,#detail2,#detail3,#detail4,#detail5,#detail6,#detail7,#detail8{
+                margin-left: 150px;
+            }
+            #detail0{
+                float: left;
+                width: 80px;
+                margin-left: 150px;
+                margin-top: 15px;
+            }
+            .detail2{
+                width: 500px;
+                height: 25px;
+                border: none;
+                border-radius: 2px;
+                background-color: #fff;
+                margin-left: 150px;
+                padding: 0;
+            }
+            #detail2{
+                font-size: 20px;
+                font-weight: normal;
+                width: 5000px;
+                height: 25px;
+                border: none;
+                border-radius: 2px;
+                color: rgb(151, 97, 187);
+                margin: 0;
+            }
+            .detail4{
+                width: 500px;
+                height: 300px;
+                border: none;
+                border-radius: 2px;
+                background-color: #fff;
+                margin-left: 150px;
+            }
+            #detail4{
+                font-size: 18px;
+                font-weight: normal;
+                width: 500px;
+                height: 300px;
+                border: none;
+                border-radius: 2px;
+                margin: 0;
+                color: rgb(151, 97, 187);
+            }
+            #detail6{
+                width: 500px;
+                height: 25px;
+                border: none;
+                border-radius: 2px;
+                color: rgb(151, 97, 187);
+                font-size: 18px;
+                font-weight: normal;
+            }
+            #detail8{
+                float: right;
+                margin-right: 146px;
+            }
+            button{
+            width: 150px;
+            height: 30px;
+            margin-top: 10px;
+            margin-right: 100px;
+            float: right;
+            background-color: #a16dc48e;
+            border: none;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 2px;
+            }
+            button:hover{
+                background-color: rgba(93, 45, 126, 0.557);
+                cursor: pointer;
+            }
+            #update{
+                width: 100px; 
+                position: absolute;  
+                margin-top: 15px;
+                margin-left: 219px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <form action="/home" method="get">
+                <button type="submit" id="detail0">Home</button>
+            </form>
+            <form action="/board/update" method="get" th:each="i : ${#numbers.sequence(0,(board.size()-1))}">
+                <input type="hidden" name="seq" th:value="${board[i].seq}" />
+                <a th:href="'/board/update?seq=' + ${board[i].seq} + '&title=' + ${board[i].title} + '&content=' + ${board[i].content} + '&writer=' + ${board[i].writer}">
+                    <button type="submit" id="update">Update</button>
+                </a>
+            </form>
+            <form action="/board/detail" method="get">
+                <input type="hidden" name="seq" th:value="${seq}" />
+                <div class="detail">
+                    <br><br><br><br>
+                    <span class="title" id="detail1">˚₊·—̳͟͞͞♡ Title<br><br>
+                        <div class="detail2">
+                            &nbsp;<span th:text="${sqlStmtTitle}" name="title" id="detail2"></span>
+                        </div>
+                        <br>
+                        <div class="userInfo">
+                            <span th:text="${sqlStmtWriter}" id="detail2-1"></span>&nbsp;
+                            <span th:text="${sqlStmtWriteDate}" id="detail2-2"></span>
+                        </div>
+                        <br>
+                    </span>
+                    <span class="content" id="detail3">˚₊·—̳͟͞͞♥ Content<br><br>
+                        <div class="detail4">
+                            &nbsp;<span th:text="${sqlStmtContent}" name="content" id="detail4"></span>
+                        </div>
+                        <br>
+                    </span>
+                <!-- </form>
+                <form> -->
+                    <span class="comment" id="detail5">˚₊·—̳͟͞͞♡ Comment<br><br>
+                        <input type="text" name="comment" id="detail6"><br><br>
+                    </span>
+                    <span class="commentSave" id="detail7">
+                        <button type="submit" id="detail8">Comment Save</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
